@@ -1,0 +1,7 @@
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/tinted
+lib/tinted.rb
+test/test_tinted.rb
