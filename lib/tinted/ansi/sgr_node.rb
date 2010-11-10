@@ -4,13 +4,13 @@ module Tinted
     class SGRNode < Treetop::Runtime::SyntaxNode
 
       CODES = {
-             0 => :reset,
-             1 => :bold,
-             2 => :faint,
-             4 => :underline,
-             5 => :blink,
-             7 => :negative,
-             8 => :conceal,
+             0  => :reset,
+             1  => :bold,
+             2  => :faint,
+             4  => :underline,
+             5  => :blink,
+             7  => :negative,
+             8  => :conceal,
              24 => :underline,
              30 => { :foreground => :black   },
              31 => { :foreground => :red     },
@@ -34,7 +34,7 @@ module Tinted
        def output
          numbers.elements.map{|e| CODES[e.number.text_value.to_i] }
        end
-       
+
     end
   end
 
