@@ -1,23 +1,37 @@
-grammar ANSI
+module Tinted
+  grammar ANSI
 
-  rule text
-   (plain_text / escape_code)*
+    rule text
+     (plain_text / escape_code)* {
+       def output
+         elements.map{ |e| e.output }.flatten
+       end
+     }
+    end
+
+    rule escape_code 
+      "\e[" code:( ed / sgr ) {
+       def output
+         code.output
+       end
+     }
+    end
+
+    rule ed # erase data
+      code:([012]) 'J' <EDNode>
+    end
+
+    rule sgr # select graphi rendition
+      numbers:(number:([0-9]+) [;]*)+ 'm' <SGRNode>
+    end
+
+    rule plain_text
+     [^\e]+ {
+       def output
+         {:text => text_value}
+       end
+     }
+    end
+
   end
-
-  rule escape_code 
-    "\e[" ( ed / sgr )
-  end
-
-  rule ed # erase data
-    [012] 'J' <EDNode>
-  end
-
-  rule sgr # select graphi rendition
-    numbers:(number:([0-9]+) [;]*)+ 'm' <SGRNode>
-  end
-
-  rule plain_text
-   [^\e]+
-  end
-
 end
