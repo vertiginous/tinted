@@ -1,3 +1,7 @@
 class Tinted
-  VERSION = '1.0.0'
+  VERSION = '0.0.1'
 end
+
+require 'treetop'
+
+require 'tinted/ansi'

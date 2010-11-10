@@ -1,0 +1,23 @@
+grammar ANSI
+
+  rule text
+   (plain_text / escape_code)*
+  end
+
+  rule escape_code 
+    "\e[" ( ed / sgr )
+  end
+
+  rule ed # erase data
+    [012] 'J'
+  end
+
+  rule sgr # select graphi rendition
+    numbers:(number:([0-9]+) [;]*)+ 'm'
+  end
+
+  rule plain_text
+   [^\e]+
+  end
+
+end

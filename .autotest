@@ -18,6 +18,6 @@ require 'autotest/restart'
 #   end
 # end
 
-# Autotest.add_hook :run_command do |at|
-#   system "rake build"
-# end
+Autotest.add_hook :run_command do |at|
+  system "tt lib\\tinted\\ansi.treetop"
+end
