@@ -5,3 +5,5 @@ end
 require 'treetop'
 
 require 'tinted/ansi'
+require 'tinted/treetop/sgr_node'
+require 'tinted/treetop/ed_node'

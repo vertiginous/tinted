@@ -9,11 +9,11 @@ grammar ANSI
   end
 
   rule ed # erase data
-    [012] 'J'
+    [012] 'J' <EDNode>
   end
 
   rule sgr # select graphi rendition
-    numbers:(number:([0-9]+) [;]*)+ 'm'
+    numbers:(number:([0-9]+) [;]*)+ 'm' <SGRNode>
   end
 
   rule plain_text

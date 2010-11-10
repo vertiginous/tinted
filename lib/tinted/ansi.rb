@@ -132,7 +132,7 @@ module ANSI
       s0 << r2
     end
     if s0.last
-      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0 = instantiate_node(EDNode,input, i0...index, s0)
       r0.extend(Ed0)
     else
       @index = i0
@@ -243,7 +243,7 @@ module ANSI
       s0 << r7
     end
     if s0.last
-      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0 = instantiate_node(SGRNode,input, i0...index, s0)
       r0.extend(Sgr1)
     else
       @index = i0
