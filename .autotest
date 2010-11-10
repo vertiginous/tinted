@@ -21,3 +21,12 @@ require 'autotest/restart'
 Autotest.add_hook :run_command do |at|
   system "tt lib\\tinted\\ansi.treetop"
 end
+
+
+Autotest.add_hook :initialize do |at|
+  at.add_exception 'lib/tinted/ansi.rb'
+
+  at.add_mapping(/(ansi)\.treetop/) do |f, _|
+    at.files_matching(/$1_spec\.rb$/)
+  end
+end
