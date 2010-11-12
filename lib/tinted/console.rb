@@ -42,17 +42,23 @@ module Tinted
                    BACKGROUND_COLORS[color]
     end
 
-    def reset
-      @attribute = @initial_attribute
+    def clear(x)
     end
 
-    def blink
+    def reset
+      @attribute = @initial_attribute
     end
 
     def negative
     end
 
+    def positive
+    end
+
     def conceal
+    end
+
+    def reveal
     end
     
     def bold
@@ -67,6 +73,12 @@ module Tinted
 
     def underline
       @attribute = @attribute | 0b10000000
+    end
+
+    def no_underline
+      @attribute = @attribute |
+                   0b10000000 ^ 
+                   0b10000000
     end
 
     def text(str)

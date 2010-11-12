@@ -16,8 +16,7 @@ module Tinted
 
     def _PrintString(obj)
       str = obj.dup.to_s
-      output = @parser.parse(str).output
-      output.each do |i| 
+      @parser.parse(str).output.each do |i| 
         case i
         when Symbol
           @console.send(i)
