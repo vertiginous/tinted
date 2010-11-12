@@ -1,19 +1,77 @@
 describe "Tinted::Console" do
 
-  it "should do something" do
-    desired_access     = Tinted::Constants::DESIRED_ACCESS
-    share_mode         = Tinted::Constants::SHARE_MODE
-    screen_buffer_data = Tinted::Constants::SCREEN_BUFFER_DATA
-    h = Tinted::API.create_console_screen_buffer(
-      desired_access,share_mode,nil,screen_buffer_data,nil
-    )
-    bi = Tinted::ConsoleScreenBufferInfo.new
-    Tinted::API.get_console_screen_buffer_info(h,bi)
-    bi[:wAttributes][:u][:asciiChar].should == 
-      Tinted::Constants::BACKGROUND_BLUE  | 
-      Tinted::Constants::BACKGROUND_GREEN | 
-      Tinted::Constants::BACKGROUND_RED   | 
-      Tinted::Constants::FOREGROUND_INTENSITY
+  before do
+    @console = Tinted::Console.new
+  end
+
+  describe "#attribute" do 
+
+    before do
+      @a = @console.attribute
+    end
+
+    it "should not be nil" do
+      @a.should_not be_nil
+    end
+
+    it "should be an integer" do
+      @a.should be_an Integer
+    end
+
+  end
+
+  describe "#foreground" do
+
+    it "should set the foreground bits to the right color" do
+      a = @console.instance_variable_get("@attribute")
+      a.should == 0b1111000
+      @console.foreground(:blue)
+      a = @console.instance_variable_get("@attribute")
+      a.should == 0b1111001
+    end
+
+  end
+
+  describe "#background" do
+
+    it "should set the background bits to the right color" do
+      a = @console.instance_variable_get("@attribute")
+      a.should == 0b1111000
+      @console.background(:blue)
+      a = @console.instance_variable_get("@attribute")
+      a.should == 0b0011000
+    end
+
+  end
+
+  describe "#reset" do
+
+    it "should set the attribute back to the initial value" do
+      init = @console.instance_variable_get("@attribute")
+      @console.background(:blue)
+      @console.foreground(:blue)
+      a = @console.instance_variable_get("@attribute")
+      a.should == 0b0011001
+
+      @console.reset
+      a = @console.instance_variable_get("@attribute")
+      a.should == init
+    end
+
+  end
+
+  describe "#text" do
+
+    it "should print text" do
+      str = 'Hello World!'
+      out = @console.text(str)
+      out.should == str.length
+
+      str = ''
+      out = @console.text(str)
+      out.should == str.length
+    end
+  
   end
 
 end

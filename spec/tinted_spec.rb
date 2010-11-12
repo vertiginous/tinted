@@ -14,6 +14,12 @@ describe "bit twiddling" do
 
       x = 0b10001000 | 0b10000000 ^ 0b10000000
       x.should == 0b00001000
+
+      x = 0b10001010 | 0b10000000
+      x.should == 0b10001010
+
+      x = 0b00001010 | 0b10000000
+      x.should == 0b10001010
     end
   end
 
