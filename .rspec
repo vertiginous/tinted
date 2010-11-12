@@ -1,0 +1,4 @@
+-I lib
+--require rubygems
+--require tinted
+--color
