@@ -10,3 +10,6 @@ require 'tinted/ansi/ed_node'
 require 'tinted/constants'
 require 'tinted/console'
 require 'tinted/api'
+require 'tinted/io'
+
+$stdout = Tinted::IO.new(:stdout)

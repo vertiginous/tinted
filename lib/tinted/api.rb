@@ -1,24 +1,19 @@
 module Tinted
   
   class Coordinates < FFI::Struct
-    layout :x, :long,
-           :y, :long
+    layout :x, :ushort,
+           :y, :ushort 
   end
 
   class SmallRectangle < FFI::Struct
-    layout   :left, :short,
-             :top, :short,
-             :right, :short,
+    layout   :left,   :short,
+             :top,    :short,
+             :right,  :short,
              :bottom, :short
-  end
-
-  class Char < FFI::Struct
-    layout :unicodeChar, :short, # WCHAR
-           :asciiChar,   :char # CHAR
   end
  
   class CharInfo < FFI::Struct
-    layout :u, Char
+    layout :char, :ushort
   end
 
   class ConsoleScreenBufferInfo < FFI::Struct
@@ -27,7 +22,6 @@ module Tinted
            :wAttributes, CharInfo,
            :srWindow, SmallRectangle,
            :dwMaximumWindowSize, Coordinates
-
   end
 
   module API
@@ -44,6 +38,11 @@ module Tinted
     attach_function :create_console_screen_buffer,
                     :CreateConsoleScreenBuffer,
                     [:uint, :int, :pointer, :int, :pointer],
+                    :pointer
+
+    attach_function :get_std_handle,
+                    :GetStdHandle,
+                    [:uint],
                     :pointer
 
     attach_function :get_console_screen_buffer_info, 

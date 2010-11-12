@@ -9,11 +9,7 @@ describe "Tinted::API" do
     )
     bi = Tinted::ConsoleScreenBufferInfo.new
     Tinted::API.get_console_screen_buffer_info(h,bi)
-    bi[:wAttributes][:u][:asciiChar].should == 
-      Tinted::Constants::BACKGROUND_BLUE  | 
-      Tinted::Constants::BACKGROUND_GREEN | 
-      Tinted::Constants::BACKGROUND_RED   | 
-      Tinted::Constants::FOREGROUND_INTENSITY
+    bi[:wAttributes][:char].should == 240
   end
 
 end

@@ -24,10 +24,10 @@ describe "Tinted::Console" do
 
     it "should set the foreground bits to the right color" do
       a = @console.instance_variable_get("@attribute")
-      a.should == 0b1111000
+      a.should == 0b11110000
       @console.foreground(:blue)
       a = @console.instance_variable_get("@attribute")
-      a.should == 0b1111001
+      a.should == 0b11110001
     end
 
   end
@@ -36,10 +36,10 @@ describe "Tinted::Console" do
 
     it "should set the background bits to the right color" do
       a = @console.instance_variable_get("@attribute")
-      a.should == 0b1111000
+      a.should == 0b11110000
       @console.background(:blue)
       a = @console.instance_variable_get("@attribute")
-      a.should == 0b0011000
+      a.should == 0b10010000
     end
 
   end
@@ -51,7 +51,7 @@ describe "Tinted::Console" do
       @console.background(:blue)
       @console.foreground(:blue)
       a = @console.instance_variable_get("@attribute")
-      a.should == 0b0011001
+      a.should == 0b10010001
 
       @console.reset
       a = @console.instance_variable_get("@attribute")
