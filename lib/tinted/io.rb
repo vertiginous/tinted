@@ -10,11 +10,11 @@ module Tinted
       @parser  = ANSIParser.new
     end
 
-    def write(*s)
-      s.each{ |x| _PrintString(x) }
+    def write(*objs)
+      objs.each{ |obj| _print_string(obj) }
     end
 
-    def _PrintString(obj)
+    def _print_string(obj)
       str = obj.dup.to_s
       @parser.parse(str).output.each do |i| 
         case i
