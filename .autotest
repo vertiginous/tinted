@@ -1,6 +1,8 @@
 # -*- ruby -*-
+# $LOAD_PATH.unshift 'lib'
 
-require 'autotest/restart'
+# require 'tinted'
+# require 'autotest/restart'
 
 # Autotest.add_hook :initialize do |at|
 #   at.extra_files << "../some/external/dependency.rb"
@@ -18,15 +20,17 @@ require 'autotest/restart'
 #   end
 # end
 
-Autotest.add_hook :run_command do |at|
-  system "tt lib\\tinted\\ansi.treetop"
-end
 
 
-Autotest.add_hook :initialize do |at|
-  at.add_exception 'lib/tinted/ansi.rb'
+# Autotest.add_hook :run_command do |at|
+#   system "tt lib\\tinted\\ansi.treetop"
+# end
 
-  at.add_mapping(/(ansi)\.treetop/) do |f, _|
-    at.files_matching(/$1_spec\.rb$/)
-  end
-end
+
+# Autotest.add_hook :initialize do |at|
+#   at.add_exception 'lib/tinted/ansi.rb'
+
+#   at.add_mapping(/(ansi)\.treetop/) do |f, _|
+#     at.files_matching(/$1_spec\.rb$/)
+#   end
+# end
