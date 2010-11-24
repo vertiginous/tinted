@@ -14,6 +14,7 @@ module Tinted
       end
       @initial_attribute = attribute
       @attribute = @initial_attribute
+      @ptr = FFI::MemoryPointer.new(4)
     end
 
     def handle
@@ -83,11 +84,10 @@ module Tinted
 
     def text(str)
       result = API.set_console_text_attribute( @handle, @attribute )
-      raise unless result
-      ptr = FFI::MemoryPointer.new(4)
-      result = API.write_console(@handle,str,str.length,ptr,nil)
-      raise unless result
-      ptr.read_int
+      # raise unless result
+      result = API.write_console(@handle,str,str.length,@ptr,nil)
+      # raise unless result
+      # ptr.read_int
     end
   
   end
