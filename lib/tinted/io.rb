@@ -16,15 +16,7 @@ module Tinted
 
     def _print_string(obj)
       str = obj.dup.to_s
-      @parser.parse(str).output.each do |i| 
-        case i
-        when Symbol
-          @console.send(i)
-        when Hash
-          @console.send(*i.to_a.flatten)
-        end
-      end
-      @console.text('')
+      @parser.parse(str, @console)
     end
 
   end
